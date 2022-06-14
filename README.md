@@ -64,7 +64,7 @@ An example of a config file is found in the `KWT_configs` folder
 To pretrain a KWT model the following command is run 
 
 ```shell
-python data2vec/train_data2vec.py --conf data2vec/data2vec_configs/<name_of_config_file>.yaml
+python train_data2vec.py --conf data2vec/data2vec_configs/<name_of_config_file>.yaml
 ```
 
 An example of a config file is found in the `data2vec/data2vec_configs/` folder
