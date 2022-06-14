@@ -75,7 +75,7 @@ To finetune a pretrained model the same setup as the baseline is used, however, 
 The path to the pretrained model is provided through an input argument:
 
 ```shell
-python train.py --conf KWT_configs/<name_of_finetune_config_file>.yaml --checkpoint <path_to_checkpoint.pth>
+python train.py --conf KWT_configs/<name_of_finetune_config_file>.yaml --ckpt <path_to_checkpoint.pth>
 ```
 
 An example of a finetuning config file is found in the `KWT_configs` folder.
