@@ -40,24 +40,24 @@ def get_train_val_test_split(root: str, train_file: str, val_file: str, test_fil
         train_duration = [element["duration"] for element in train_data]
         train_list = [root + element["audio_file_path"] for element in train_data]
         train_labels = [element["is_hotword"] for element in train_data]
-        train_list = list(compress(train_list, [duration <= 5 for duration in train_duration]))
-        train_labels = list(compress(train_labels, [duration <= 5 for duration in train_labels]))
+        train_list = list(compress(train_list, [duration <= 5 and duration > 0 for duration in train_duration]))
+        train_labels = list(compress(train_labels, [duration <= 5 and duration > 0 for duration in train_duration]))
 
     with open(val_file) as file:
         val_data = json.load(file)
         val_duration = [element["duration"] for element in val_data]
         val_list = [root + element["audio_file_path"] for element in val_data]
         val_labels = [element["is_hotword"] for element in val_data]
-        val_list = list(compress(val_list, [duration <= 5 for duration in val_duration]))
-        val_labels = list(compress(val_labels, [duration <= 5 for duration in val_labels]))
+        val_list = list(compress(val_list, [duration <= 5 and duration > 0 for duration in val_duration]))
+        val_labels = list(compress(val_labels, [duration <= 5 and duration > 0 for duration in val_duration]))
 
     with open(test_file) as file:
         test_data = json.load(file)
         test_duration = [element["duration"] for element in test_data]
         test_list = [root + element["audio_file_path"] for element in test_data]
         test_labels = [element["is_hotword"] for element in test_data]
-        test_list = list(compress(test_list, [duration <= 5 for duration in test_duration]))
-        test_labels = list(compress(test_labels, [duration <= 5 for duration in test_duration]))
+        test_list = list(compress(test_list, [duration <= 5 and duration > 0 for duration in test_duration]))
+        test_labels = list(compress(test_labels, [duration <= 5 and duration > 0 for duration in test_duration]))
 
     ###################
     # Pretrain Split

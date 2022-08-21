@@ -1,17 +1,17 @@
 # sample config
 
-data_root: C:\Users\holge\Downloads\hey_snips_fl_5.0.tar\hey_snips_fl_amt_v7.0\hey_snips_fl_amt\
-train_list_file: C:\Users\holge\Downloads\hey_snips_fl_5.0.tar\hey_snips_fl_amt_v7.0\hey_snips_fl_amt/training_list.txt
-train_labels_file: C:\Users\holge\Downloads\hey_snips_fl_5.0.tar\hey_snips_fl_amt_v7.0\hey_snips_fl_amt/training_labels.txt
-val_list_file: C:\Users\holge\Downloads\hey_snips_fl_5.0.tar\hey_snips_fl_amt_v7.0\hey_snips_fl_amt/validation_list.txt
-val_labels_file: C:\Users\holge\Downloads\hey_snips_fl_5.0.tar\hey_snips_fl_amt_v7.0\hey_snips_fl_amt/validation_labels.txt
-test_list_file: C:\Users\holge\Downloads\hey_snips_fl_5.0.tar\hey_snips_fl_amt_v7.0\hey_snips_fl_amt/test_list.txt
-test_labels_file: C:\Users\holge\Downloads\hey_snips_fl_5.0.tar\hey_snips_fl_amt_v7.0\hey_snips_fl_amt/test_labels.txt
+data_root: /home/ubuntu/hey_snips_fl_amt/
+train_list_file: /home/ubuntu/hey_snips_fl_amt/training_list.txt
+train_labels_file: /home/ubuntu/hey_snips_fl_amt/training_labels.txt
+val_list_file: /home/ubuntu/hey_snips_fl_amt/validation_list.txt
+val_labels_file: /home/ubuntu/hey_snips_fl_amt/validation_labels.txt
+test_list_file: /home/ubuntu/hey_snips_fl_amt/testing_list.txt
+test_labels_file: /home/ubuntu/hey_snips_fl_amt/testing_labels.txt
 
 exp:
-    wandb: False
+    wandb: True
     wandb_api_key: 
-    proj_name: data2vec_KWS
+    proj_name: data2vec_KWS_snips
     exp_dir: ./runs
     exp_name: baseline
     device: auto
@@ -21,7 +21,7 @@ exp:
     val_freq: 5    # validate every v_f epochs
     n_workers: 1
     pin_memory: True
-    cache: 0 # 0 -> no cache | 1 -> cache wavs | 2 -> cache specs; stops wav augments
+    cache: 2 # 0 -> no cache | 1 -> cache wavs | 2 -> cache specs; stops wav augments
     
 
 hparams:
