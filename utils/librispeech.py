@@ -171,7 +171,8 @@ def collate_batch(batch):
         segments[-1] = F.pad(segments[-1], (0, 16000 - segments[-1].size(dim=-1)), mode='constant', value=0)
         mfcc_segments = [transform(wave) for wave in segments]
         all_segments.extend(mfcc_segments)
-    return all_segments
+        out = torch.stack(all_segments)
+    return out
 
 
 def get_librispeech_loader(data, batch_size):
