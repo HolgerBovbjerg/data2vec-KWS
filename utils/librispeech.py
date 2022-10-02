@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from typing import Tuple, Union
+import random
 
 import torchaudio
 from torch import Tensor
@@ -110,6 +111,7 @@ class LIBRISPEECH(Dataset):
             url: str = URL,
             folder_in_archive: str = FOLDER_IN_ARCHIVE,
             download: bool = False,
+            fraction: float = None
     ) -> None:
         if url not in _DATA_SUBSETS:
             raise ValueError(f"Invalid url '{url}' given; please provide one of {_DATA_SUBSETS}.")
@@ -126,6 +128,9 @@ class LIBRISPEECH(Dataset):
                 )
 
         self._walker = sorted(str(p.stem) for p in Path(self._path).glob("*/*/*" + self._ext_audio))
+        if fraction is not None:
+            self.fraction = fraction
+            self._walker = random.sample(self._walker, round(self.fraction*len(self._walker)))
 
     def __getitem__(self, n: int) -> Tuple[Tensor, int, str, int, int, int]:
         """Load the n-th sample from the dataset.
@@ -182,8 +187,8 @@ def get_librispeech_loader(data, batch_size):
 if __name__ == "__main__":
 
     root = "C:\\Users\\holge\\Downloads\\"
-    data = LIBRISPEECH(root=root)
-    loader = get_librispeech_loader(data, batch_size=50)
+    data = LIBRISPEECH(root=root, fraction=0.18)
+    loader = get_librispeech_loader(data, batch_size=32)
 
     for batch in loader:
         waves = batch
