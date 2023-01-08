@@ -79,3 +79,15 @@ python train.py --conf KWT_configs/<name_of_finetune_config_file>.yaml --ckpt <p
 ```
 
 An example of a finetuning config file is found in the `KWT_configs` folder.
+
+# Results
+The following table is a summary of accuracies obtained for the three KWT models. 
+Baseline is the performance without pretraining using 20% labelled data.
+SC denotes Data2Vec pretraining using Speech Commands pretraining set, and LS denotes pretraining using Librispeech 100-hour clean training set. 
+Full indicates model trained on the full original Speech Commands V2 training set without Data2Vec pretraining.
+
+| Model | Baseline | Data2Vec-SC | Data2Vec-LS | Full    |
+|-------|----------|:-----------:|-------------|---------|
+| KWT-1 | 0.8622   | 0.9294      | 0.9436      | 0.9638  |
+| KWT-2 | 0.8575   | 0.9507      | 0.9447      | 0.9498  |
+| KWT-3 | 0.8398   | 0.9529      | 0.9458      | 0.9079  |
