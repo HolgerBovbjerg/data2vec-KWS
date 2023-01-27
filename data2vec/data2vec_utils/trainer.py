@@ -2,7 +2,7 @@
 import math
 import os
 import time
-from typing import Callable, Any
+from typing import Callable, Any, Tuple
 
 import torch
 from torch import nn, optim
@@ -39,7 +39,7 @@ def variance_loss(z_a: torch.Tensor, z_b: torch.Tensor):
 
 
 def train_single_batch(net: Data2Vec, data: torch.Tensor, mask: torch.Tensor, optimizer: optim.Optimizer,
-                       criterion: Callable, device: torch.device) -> tuple[Any, Any, Any]:
+                       criterion: Callable, device: torch.device) -> Tuple[Any, Any, Any]:
     """
     Performs single training step for Data2Vec model
     :param net: Data2Vec model
@@ -68,7 +68,7 @@ def train_single_batch(net: Data2Vec, data: torch.Tensor, mask: torch.Tensor, op
 
 @torch.no_grad()
 def evaluate(net: Data2Vec, mask_generator: AudioMaskingGenerator, criterion: Callable, dataloader: DataLoader,
-             device: torch.device) -> tuple[float, float, float]:
+             device: torch.device) -> Tuple[float, float, float]:
     """
     Evaluates Data2Vec model
     :param net: Data2Vec model
