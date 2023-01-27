@@ -39,7 +39,7 @@ python make_data_list.py --pretrain <amount_of_train_set_for_pretrain> -v <path/
 
 For example:
 ```bash
-python make_data_list.py --pretrain 0.8 -v speech_commands_v0.02/validation_list.txt -t speech_commands_v0.02/testing_list.txt -d speech_commands_v0.02 -o data_split_lists
+python make_data_list.py --pretrain 0.8 -v speech_commands_v0.02/validation_list.txt -t speech_commands_v0.02/testing_list.txt -d speech_commands_v0.02 -o speech_commands_v0.02/_generated
 ```
 
 ## Google Speech Commands
