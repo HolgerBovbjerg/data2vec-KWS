@@ -58,7 +58,7 @@ This yields the following splits:
 
 
 ## Experiment configuration
-The configurations for all experiments are stored in `.yaml` files, which contain everything from the data_path to hyperparameters.
+The configurations for all experiments are stored in `.yaml` files, which contain everything from the data path to hyperparameters.
 Configuration files for all experiments regarding the above dataset are provided in the `KWT_configs` and `data2vec/data2vec_configs` folders.
 This includes configuration for KWT model baselines on the reduced Speech Commands training set, Data2Vec pretraining configurations for Speech Commands pretratining set and finetuning on the reduced Speech Commands training set.
 
