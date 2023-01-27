@@ -8,4 +8,4 @@ torchaudio==0.11.0
 torchvision==0.12.0
 tqdm==4.64.0
 transformers==4.18.0
-wandb==0.12.16
+wandb==0.13.5
