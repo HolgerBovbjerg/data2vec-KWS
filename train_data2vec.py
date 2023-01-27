@@ -70,8 +70,11 @@ def training_pipeline(config):
                         ema_anneal_end_step=config["hparams"]["model"]["ema_anneal_end_step"],
                         average_top_k_layers=config["hparams"]["model"]["average_top_k_layers"],
                         normalize_targets=config["hparams"]["model"]["normalize_targets"])
+    if args.ckpt:
+        ckpt = torch.load(args.ckpt, map_location="cpu")
+        model.load_state_dict(ckpt["model_state_dict"])
+        print(f"Loaded checkpoint {args.ckpt}.")
     model = data2vec.to(config["hparams"]["device"])
-
     print(f"Created model with {count_params(model)} parameters.")
 
     # Loss
@@ -146,7 +149,10 @@ def main(args):
     """
     config = get_config(args.conf)
     seed_everything(config["hparams"]["seed"])
-
+    
+    if args.id:
+        config["exp"]["exp_name"] = config["exp"]["exp_name"] + args.id
+    
     if config["exp"]["wandb"]:
         if config["exp"]["wandb_api_key"] is not None:
             with open(config["exp"]["wandb_api_key"], "r") as f:
@@ -159,7 +165,7 @@ def main(args):
             wandb.login()
 
         with wandb.init(project=config["exp"]["proj_name"], 
-                        name=(config["exp"]["exp_name"]), 
+                        name=config["exp"]["exp_name"], 
                         config=config["hparams"]):
             training_pipeline(config)
 
@@ -170,6 +176,8 @@ def main(args):
 if __name__ == "__main__":
     parser = ArgumentParser("Driver code.")
     parser.add_argument("--conf", type=str, required=True, help="Path to config.yaml file.")
+    parser.add_argument("--ckpt", type=str, required=False, help="Path to checkpoint file.", default=None)
+    parser.add_argument("--id", type=str, required=False, help="Obtional experiment identifier.", default=None)
     args = parser.parse_args()
 
     main(args)

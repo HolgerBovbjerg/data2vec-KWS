@@ -12,7 +12,7 @@ exp:
     wandb_api_key: 
     proj_name: data2vec_KWS
     exp_dir: ./runs
-    exp_name: baseline_mean_full_train
+    exp_name: kwt1_baseline_mean
     device: auto
     log_freq: 20    # log every l_f steps
     log_to_file: True

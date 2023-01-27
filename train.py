@@ -127,6 +127,9 @@ def main(args):
     config = get_config(args.conf)
     seed_everything(config["hparams"]["seed"])
 
+    if args.id:
+        config["exp"]["exp_name"] = config["exp"]["exp_name"] + args.id
+
     if config["exp"]["wandb"]:
         if config["exp"]["wandb_api_key"] is not None:
             with open(config["exp"]["wandb_api_key"], "r") as f:
@@ -149,6 +152,7 @@ if __name__ == "__main__":
     parser = ArgumentParser("Driver code.")
     parser.add_argument("--conf", type=str, required=True, help="Path to config.yaml file.")
     parser.add_argument("--ckpt", type=str, required=False, help="Path to checkpoint file.", default=None)
+    parser.add_argument("--id", type=str, required=False, help="Obtional experiment identifier.", default=None)
     args = parser.parse_args()
 
     main(args)
