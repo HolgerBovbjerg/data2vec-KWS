@@ -61,8 +61,12 @@ This yields the following splits:
 The configurations for all experiments are stored in `.yaml` files, which contain everything from the data path to hyperparameters.
 You will need to ensure that the paths in the configuration file matches your local data paths.
 
-Configuration files for all experiments regarding the above mentioned dataset are provided in the `KWT_configs` and `data2vec/data2vec_configs` folders.
+Configuration files for all experiments regarding the above-mentioned dataset are provided in the `KWT_configs` and `data2vec/data2vec_configs` folders.
 This includes configuration for KWT model baselines on the reduced Speech Commands training set, Data2Vec pretraining configurations for Speech Commands pretratining set and finetuning on the reduced Speech Commands training set.
+
+Config files for baseline and finetuning containing "mean" in the filename uses the mean of the tranformer outputs as input for the classification head,
+while the ones that don't use a CLS token as in the original KWT model. 
+The best results are obtained using mean.
 
 ## Baseline KWT results
 To produce the baseline results without pretraining the following command is run:
@@ -73,7 +77,7 @@ python train.py --conf KWT_configs/<name_of_config_file>.yaml
 
 For example:
 ```bash
-python train.py --conf KWT_configs/kwt1_baseline_mean.yaml
+python train.py --conf KWT_configs/kwt1_baseline_mean_config.yaml
 ```
 
 Config files for baseline experiments are found in the `KWT_configs` folder.
@@ -94,7 +98,7 @@ python train_data2vec.py --conf data2vec/data2vec_configs/kwt1_data2vec_config.y
 
 Data2vec config files are found in the `data2vec/data2vec_configs/` folder.
 
-After pretraining both the full Data2Vec model is saved to the experiment folder, as well as only the transformer encoder part.
+After pretraining the full Data2Vec model is saved to the experiment folder, as well as only the transformer encoder part.
 For finetuning only the transformer encoder is reused.
 
 ## Finetuning pretrained models
@@ -107,7 +111,7 @@ python train.py --conf KWT_configs/<name_of_finetune_config_file>.yaml --ckpt <p
 
 For example:
 ```bash
-python train.py --conf KWT_configs/kwt1_baseline_mean.yaml --ckpt runs/kwt1_baseline_mean/best_encoder.pth
+python train.py --conf KWT_configs/kwt1_finetune_mean_config.yaml --ckpt runs/kwt1_data2vec/best_encoder.pth
 ```
 
 Finetuning config files are found in the `KWT_configs` folder.

@@ -10,6 +10,9 @@ def main(args):
                                                                                          args.val_list_file,
                                                                                          args.test_list_file,
                                                                                          args.pretrain)
+    if not os.path.isdir(args.out_dir):
+        os.makedirs(args.out_dir)
+
     if len(pretrain_list) > 0:
         with open(os.path.join(args.out_dir, "pretraining_list.txt"), "w+") as f:
             f.write("\n".join(pretrain_list))
