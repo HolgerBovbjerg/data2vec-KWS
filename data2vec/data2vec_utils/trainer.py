@@ -56,8 +56,7 @@ def train_single_batch(net: Data2Vec, data: torch.Tensor, mask: torch.Tensor, op
     optimizer.zero_grad()
     predictions, targets = net(data, data, mask)
     scale = math.sqrt(predictions.size(dim=-1))
-    loss = criterion(predictions.float(), targets.float()).sum(dim=-1).sum().div(scale) + \
-           25 * variance_loss(predictions.float(), targets.float())
+    loss = criterion(predictions.float(), targets.float()).sum(dim=-1).sum().div(scale)
     loss.backward()
     optimizer.step()
     with torch.no_grad():
