@@ -177,7 +177,7 @@ if __name__ == "__main__":
     parser = ArgumentParser("Driver code.")
     parser.add_argument("--conf", type=str, required=True, help="Path to config.yaml file.")
     parser.add_argument("--ckpt", type=str, required=False, help="Path to checkpoint file.", default=None)
-    parser.add_argument("--id", type=str, required=False, help="Obtional experiment identifier.", default=None)
+    parser.add_argument("--id", type=str, required=False, help="Optional experiment identifier.", default=None)
     args = parser.parse_args()
 
     main(args)
