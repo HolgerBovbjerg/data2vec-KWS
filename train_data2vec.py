@@ -72,7 +72,7 @@ def training_pipeline(config):
                         normalize_targets=config["hparams"]["model"]["normalize_targets"])
     if args.ckpt:
         ckpt = torch.load(args.ckpt, map_location="cpu")
-        model.load_state_dict(ckpt["model_state_dict"])
+        data2vec.load_state_dict(ckpt["model_state_dict"])
         print(f"Loaded checkpoint {args.ckpt}.")
     model = data2vec.to(config["hparams"]["device"])
     print(f"Created model with {count_params(model)} parameters.")
