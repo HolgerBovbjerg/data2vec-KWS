@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Baselines
-python train.py --conf KWT_configs/kwt1_base_mean_config.yaml
-python train.py --conf KWT_configs/kwt2_base_mean_config.yaml
-python train.py --conf KWT_configs/kwt3_base_mean_config.yaml
+python train.py --conf KWT_configs/kwt1_baseline_mean_config.yaml
+python train.py --conf KWT_configs/kwt2_baseline_mean_config.yaml
+python train.py --conf KWT_configs/kwt3_baseline_mean_config.yaml
 
 # Data2Vec pretraining
 python train_data2vec.py --conf data2vec/data2vec_configs/kwt1_data2vec_config.yaml
