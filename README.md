@@ -103,7 +103,9 @@ For finetuning only the transformer encoder is reused.
 
 ## Finetuning pretrained models
 To finetune a pretrained model the same setup as the baseline is used, however, a pretrained checkpoint is first loaded for the encoder part of the model.
-The path to the pretrained model is provided through an input argument:
+A pretrained kwt1 model checkpoint is found in the repository root, called ```kwt1_pretrained.pth```.
+
+The path to the pretrained model is provided through an argument:
 
 ```shell
 python train.py --conf KWT_configs/<name_of_finetune_config_file>.yaml --ckpt <path_to_checkpoint.pth>
