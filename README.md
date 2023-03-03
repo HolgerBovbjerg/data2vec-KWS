@@ -13,6 +13,7 @@ as well as the published code in the [FAIRSEQ python library](https://github.com
 
 ## Setup
 The codebase is implemented in Python and tested for Python 3.8 and 3.9.
+It is reccomended to first setup a virual environment, e.g. using venv or conda.
 The necessary Python packages to run the code is installed by running:
 
 ```shell
