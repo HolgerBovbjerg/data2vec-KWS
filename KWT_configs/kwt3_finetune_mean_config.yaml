@@ -39,6 +39,7 @@ hparams:
             hop_length: 160
             center: False
             fmax: 7600
+            fmin: 20
     
     model:
         name: # if name is provided below settings will be ignored during model creation
