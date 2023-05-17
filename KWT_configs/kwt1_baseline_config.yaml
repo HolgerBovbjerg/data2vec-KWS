@@ -8,7 +8,7 @@ test_list_file: speech_commands_v0.02/_generated/testing_list.txt
 label_map: speech_commands_v0.02/_generated/label_map.json
 
 exp:
-    wandb: True
+    wandb: False
     wandb_api_key: 
     proj_name: data2vec_KWS
     exp_dir: ./runs
@@ -20,7 +20,7 @@ exp:
     val_freq: 5    # validate every v_f epochs
     n_workers: 1
     pin_memory: True
-    cache: 2 # 0 -> no cache | 1 -> cache wavs | 2 -> cache specs; stops wav augments
+    cache: 0 # 0 -> no cache | 1 -> cache wavs | 2 -> cache specs; stops wav augments
     
 
 hparams:
@@ -31,11 +31,14 @@ hparams:
 
     audio:
         sr: 16000
-        n_mels: 40
-        n_fft: 480
-        win_length: 480
-        hop_length: 160
-        center: False
+        n_mfcc: 40
+        kwargs:
+            n_mels: 80
+            n_fft: 480
+            win_length: 480
+            hop_length: 160
+            center: False
+            fmax: 7600
     
     model:
         name: kwt-1 # if name is provided below settings will be ignored during model creation

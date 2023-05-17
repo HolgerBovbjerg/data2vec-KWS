@@ -46,8 +46,12 @@ def training_pipeline(config):
     with open(config["val_list_file"], "r") as f:
         val_list = f.read().rstrip().split("\n")
 
+    with open(config["test_list_file"], "r") as f:
+        test_list = f.read().rstrip().split("\n")
+
     trainloader = get_loader(train_list, config, train=True)
     valloader = get_loader(val_list, config, train=False)
+    testloader = get_loader(test_list, config, train=False)
 
     # model
     model = get_model(config["hparams"]["model"])
@@ -92,10 +96,6 @@ def training_pipeline(config):
     # Final Test
     #####################################
 
-    with open(config["test_list_file"], "r") as f:
-        test_list = f.read().rstrip().split("\n")
-
-    testloader = get_loader(test_list, config, train=False)
     final_step = calc_step(config["hparams"]["n_epochs"] + 1, len(trainloader), len(trainloader) - 1)
 
     # evaluating the final state (last.pth)
@@ -136,7 +136,7 @@ def main(args):
                 os.environ["WANDB_API_KEY"] = f.read()
         
         elif os.environ.get("WANDB_API_KEY", False):
-            print(f"Found API key from env variable.")
+            print("Found API key from env variable.")
         
         else:
             wandb.login()
