@@ -58,10 +58,10 @@ This yields the following splits:
 
 | Split       | No. keyword examples |
 |-------------|----------------------|
-| Pretraining | 67 731               |
-| Training    | 16 932               |
-| Validation  | 10 583               |
-| Testing     | 10 583               |
+| Pretraining | 67 874               |
+| Training    | 16 969               |
+| Validation  |  9 981               |
+| Testing     | 11 005               |
 
 
 ## Experiment configuration
@@ -129,12 +129,22 @@ Finetuning config files are found in the `KWT_configs` folder.
 The following table is a summary of accuracies obtained for the three KWT models. 
 Baseline is the performance without pretraining using the reduced training set with only 20% of the labelled data.
 SC denotes finetuning on the reduced Speech Commands training set after Data2Vec pretraining using Speech Commands pretraining set.
-Additionally, accuries for LS and Full are provided. 
+Additionally, accuries for Librispeech pretraining. 
 LS denotes finetuning on the reduced Speech Commands training set after Data2Cec pretraining using the Librispeech 100-hour clean training set. 
-Full indicates training on the full original Speech Commands V2 training set without Data2Vec pretraining.
 
-| Model | Baseline | Data2Vec-SC | Data2Vec-LS | Full    |
-|-------|----------|:-----------:|-------------|---------|
-| KWT-1 | 0.8622   | 0.9294      | 0.9436      | 0.9638  |
-| KWT-2 | 0.8575   | 0.9507      | 0.9447      | 0.9498  |
-| KWT-3 | 0.8398   | 0.9529      | 0.9458      | 0.9079  |
+
+| Model 	| Baseline 	| Data2Vec-SC 	| Data2Vec-SC-FE 	| Data2Vec-LS 	|
+|-------	|----------	|-------------	|----------------	|-------------	|
+| KWT-1 	| 0.8622   	| 0.9294      	| 0.4292         	| 0.9436      	|
+| KWT-2 	| 0.8575   	| 0.9507      	| 0.4974         	| 0.9447      	|
+| KWT-3 	| 0.8398   	| 0.9529      	| 0.4960         	| 0.9458      	|
+
+We also tested the performance benefit when all the labelled data is available.
+Full indicates training on the full original Speech Commands V2 training set without Data2Vec pretraining.
+LS-Pretrain + Full denotes a model fine-tuned on the full original training set after pretraining on librispeech.
+
+| Model 	| Full         	| Full + LS pretrain 	|
+|-------	|--------------	|--------------------	|
+| KWT-1 	| 0.9638       	| 0.9713             	|
+| KWT-2 	| 0.9498       	| 0.9716             	|
+| KWT-3 	| 0.9079 	      | 0.9716             	|
