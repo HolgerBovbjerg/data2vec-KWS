@@ -117,7 +117,7 @@ class GoogleSpeechDataset(Dataset):
         if self.cache:
             x = self.data_list[idx]
         else:
-            x = librosa.load(self.data_list[idx], self.audio_settings["sr"])[0]
+            x, _ = librosa.load(path=self.data_list[idx], sr=self.audio_settings["sr"])
 
         x = self.transform(x)
 
@@ -154,14 +154,13 @@ class GoogleSpeechDataset(Dataset):
                 if "resample" in self.aug_settings:
                     x, _ = resample(x, sr, **self.aug_settings["resample"])
 
-            x = librosa.util.fix_length(x, sr)
+            x = librosa.util.fix_length(data=x, size=sr)
 
             ###################
             # Spectrogram
             ###################
 
-            x = librosa.feature.melspectrogram(y=x, **self.audio_settings)
-            x = librosa.feature.mfcc(S=librosa.power_to_db(x), n_mfcc=self.audio_settings["n_mels"])
+            x = librosa.feature.mfcc(y=x, sr=sr, n_mfcc=self.audio_settings["n_mfcc"], **self.audio_settings["kwargs"])
 
         if self.aug_settings is not None and "spec_aug" in self.aug_settings:
             x = spec_augment(x, **self.aug_settings["spec_aug"])
@@ -171,11 +170,10 @@ class GoogleSpeechDataset(Dataset):
 
 
 def cache_item_loader(path: str, sr: int, cache_level: int, audio_settings: dict) -> np.ndarray:
-    x = librosa.load(path, sr)[0]
+    x = librosa.load(path=path, sr=sr)[0]
     if cache_level == 2:
-        x = librosa.util.fix_length(x, sr)
-        x = librosa.feature.melspectrogram(y=x, **audio_settings)
-        x = librosa.feature.mfcc(S=librosa.power_to_db(x), n_mfcc=audio_settings["n_mels"])
+        x = librosa.util.fix_length(data=x, size=sr)
+        x = librosa.feature.mfcc(y=x, sr=sr, n_mfcc=audio_settings["n_mfcc"], **audio_settings["kwargs"])
     return x
 
 

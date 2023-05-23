@@ -1,6 +1,6 @@
 """Data2Vec module based on https://github.com/arxyzan/data2vec-pytorch"""
 import torch
-import torch.nn as nn
+from torch import nn
 import torch.nn.functional as F
 
 from models.modules.EMA import EMA
@@ -33,7 +33,7 @@ class Data2Vec(nn.Module):
         :param normalize_targets: Specifies whether Dat2Vec targets are normalized
         :param kwargs: keyword arguments
         """
-        super(Data2Vec, self).__init__()
+        super().__init__()
         self.encoder = encoder
         assert modality in self.MODALITIES
         self.modality = modality
@@ -45,7 +45,7 @@ class Data2Vec(nn.Module):
         self.normalize_targets = normalize_targets
         self.__dict__.update(kwargs)
 
-        self.ema = EMA(self.encoder, device="cuda")  # Instantiate teacher encoder
+        self.ema = EMA(self.encoder, device="cuda" if torch.cuda.is_available() else "cpu")  # Teacher
         self.regression_head = self._build_regression_head()  # Instantiate regression head to predict target
 
     def _build_regression_head(self):

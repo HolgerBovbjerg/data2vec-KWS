@@ -88,7 +88,7 @@ def evaluate(net: Data2Vec, mask_generator: AudioMaskingGenerator, criterion: Ca
         data = data.to(device)
         batch_size = data.size(dim=0)
         audio_length = data.size(dim=-1)
-        mask = mask_generator(shape=(batch_size, audio_length)).to("cuda")
+        mask = mask_generator(shape=(batch_size, audio_length)).to(device)
         mask = torch.cat([torch.zeros(batch_size, 1, device=mask.device), mask], dim=1).bool()
 
         predictions, targets = net(data, data, mask)
@@ -148,7 +148,7 @@ def train(net: nn.Module, mask_generator, optimizer: optim.Optimizer, criterion:
             ####################
             # optimization step
             ####################
-            mask = mask_generator(shape=(batch_size, audio_length)).to("cuda")
+            mask = mask_generator(shape=(batch_size, audio_length)).to(device)
             mask = torch.cat([torch.zeros(batch_size, 1, device=mask.device), mask], dim=1).bool()
 
             loss, target_var, prediction_var = train_single_batch(net, data, mask, optimizer, criterion, device)
