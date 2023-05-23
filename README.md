@@ -129,6 +129,7 @@ Finetuning config files are found in the `KWT_configs` folder.
 The following table is a summary of accuracies obtained for the three KWT models. 
 Baseline is the performance without pretraining using the reduced training set with only 20% of the labelled data.
 SC denotes finetuning on the reduced Speech Commands training set after Data2Vec pretraining using Speech Commands pretraining set.
+SC-FE denotes fine-tuning with the encoder weights frozen, such that only the linear classification head is trained (Linear Probing).
 Additionally, accuries for Librispeech pretraining. 
 LS denotes finetuning on the reduced Speech Commands training set after Data2Cec pretraining using the Librispeech 100-hour clean training set. 
 
