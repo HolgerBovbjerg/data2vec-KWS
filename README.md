@@ -1,5 +1,5 @@
 # data2vec-KWS
-This repository contains code for applying [Data2Vec](https://arxiv.org/abs/2202.03555) to pretrain the [KWT model by Axel Berg](https://arxiv.org/abs/2104.00769) as described in [Improving Label-Deficient Keyword Spotting Through Self-Supervised Pretraining](arxiv.org/abs/2210.01703).
+This repository contains code for applying [Data2Vec](https://arxiv.org/abs/2202.03555) to pretrain the [KWT model by Axel Berg](https://arxiv.org/abs/2104.00769) as described in [Improving Label-Deficient Keyword Spotting Through Self-Supervised Pretraining](https://arxiv.org/abs/2210.01703).
 The goal was to improve keyword spotting when only a small amount of labelled data is available.
 
 Experiments are carried out on a reduced labelled setup of the Google Speech Commands V2 data set.
