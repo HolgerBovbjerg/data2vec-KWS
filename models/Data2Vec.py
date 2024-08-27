@@ -112,7 +112,7 @@ class Data2Vec(nn.Module):
                 y = [F.instance_norm(tl.float().transpose(1, 2)).transpose(1, 2) for tl in y]
                 y = sum(y) / len(y)
                 if self.normalize_targets:
-                    y = F.instance_norm(y).transpose(1, 2).transpose(1, 2)
+                    y = F.instance_norm(y.transpose(1, 2)).transpose(1, 2)
 
         x = x[mask]
         y = y[mask]
